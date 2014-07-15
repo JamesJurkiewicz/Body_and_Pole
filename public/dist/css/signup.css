@@ -1,0 +1,49 @@
+.ticket-form{
+	background:#444;
+	width:60%;
+	text-align: center;
+}
+
+
+.container-inner{
+	text-align: center;
+	padding: 20px 20px;
+	margin: 20px 20px;
+	border-radius: 5px;
+}
+
+.form-control{
+	margin:20px 20px;
+}
+
+.table-hover{
+	background-color: #444;
+}
+
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+background-color: #333;
+}
+
+input{
+background-color: rgba(240,240,240,1);
+}
+
+.form-inline{
+	border-radius: 20px;
+}
+
+.btn{
+	margin: 20px 20px;
+}
+
+.panel-heading{
+	background-color: #444;
+}
+
+.panel-body{
+	background-color:#333;
+}
+
+td{
+	padding-bottom: 0px;
+}

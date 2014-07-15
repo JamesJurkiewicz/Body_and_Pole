@@ -1,0 +1,40 @@
+
+
+.item{
+    background: #333;    
+    text-align: center;
+    height: 500px !important;
+}
+.carousel{
+    margin-top: 20px;
+    text-align: center;
+}
+.bs-example{
+	margin: 20px;
+}
+
+.img-circle{
+	width: 200px;
+	text-align: center;
+}
+
+.carousel-caption{
+	text-align: center;
+}
+
+.media-img{
+	width: 30px;
+	text-align: center;
+}
+
+#media{
+	display: inline-block;
+	text-align: center;
+	overflow: hidden;
+}
+
+#media img {
+display: inline;
+margin: 0 10px;
+text-align: center;
+}

@@ -1,0 +1,21 @@
+
+
+ul.dropdown-menu{
+	float: left;
+	border:transparent;
+	position:relative;
+	border-radius:4px;
+	text-align: left;
+	color:#444;
+	}
+	
+.dropdown-menu > li :hover {
+	background: transparent; 
+	font-weight:bold;
+	}
+
+.navbar{
+	margin-top:20px;
+	background-color:#444;
+	}
+

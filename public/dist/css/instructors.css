@@ -1,0 +1,39 @@
+
+
+.img-responsive{
+max-width:60%;
+float:right;
+margin-top: 20px;
+}
+
+li.active-link{
+	background-color: transparent;
+}
+
+hr{
+    padding: 10px 10px;
+    border: none;
+    border-top: medium double;
+    color: white;
+    text-align: center;
+    width:80%;
+}
+
+.instructor_table{
+	border-collapse: collapse;
+	border-spacing: 5px;
+	margin: 10px 10px;
+}
+.instructor_table.th{
+	border-right-style: solid;
+	border-right: 2px;
+	width:100px;
+}
+
+td,th{
+	padding-right: 50px;
+}
+
+.instructor_description {
+  margin-top:10px;
+}
