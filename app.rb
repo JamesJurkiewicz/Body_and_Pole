@@ -3,6 +3,7 @@ require 'pony'
 require 'json'
 require 'rubygems'
 require 'google_drive'
+require 'mail'
 
 get '/'  do
   erb :index
@@ -110,7 +111,7 @@ post '/sign_up' do
           )
   =end
 =end
-    Pony.mail(:to => 'james.jurkiewicz12@gmail.com', :subject => "Wow - an email", :body=>"Hi. This is your program speaking. Bye.")
+    Pony.mail(:to => 'james.jurkiewicz12@gmail.com', :via => :smtp, :subject => "Wow - an email", :body=>"Hi. This is your program speaking. Bye.")
       erb :thankyou
     else 
       erb :failure
