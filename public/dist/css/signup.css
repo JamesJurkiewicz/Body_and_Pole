@@ -1,5 +1,6 @@
 .ticket-form{
 	background:#444;
+	text-align: left;
 }
 
 .container-inner{
@@ -11,10 +12,12 @@
 
 .form-control{
 	margin:20px 20px;
+
 }
 
 .table-hover{
 	background-color: #444;
+	text-align: center;
 }
 
 .table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
@@ -44,4 +47,8 @@ background-color: rgba(240,240,240,1);
 
 td{
 	padding-bottom: 0px;
+}
+
+form{
+	border-radius: 20px
 }

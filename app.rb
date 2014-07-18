@@ -99,15 +99,18 @@ post '/sign_up' do
 
     if ws[i,8].to_i >= 0 
 
+=begin
       Pony.mail( 
           :to => @email,
           #:bcc => "anneka@",
           :subject => "Body and Pole Guernsey confirmation",
           :body => erb(:email, :layout => false),
-          :attachments => {File.basename("#{H&F_Declaration}") => File.read("#{H&F_Declaration}")},
+        # :attachments => {File.basename("#{H&F_Declaration}") => File.read("#{H&F_Declaration}")},
         # :attachments => {"H&F_Declaration.docx" => File.read("/H&F_Declaration.docx"), "hello.txt" => "hello!"}   
           )
-
+  =end
+=end
+    Pony.mail(:to => 'james.jurkiewicz12@gmail.com', :subject => "Wow - an email", :body=>"Hi. This is your program speaking. Bye.")
       erb :thankyou
     else 
       erb :failure
