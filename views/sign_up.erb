@@ -10,122 +10,159 @@
 
 	<hr>
 	<h2>Group Classes</h2>
-	<p>We offer a package of 8 weekly sessions. To sign up to a session please fill in the form below. On submitting the form you will be emailed to confirm your booking and complete payment.</p>
+	<p>We offer a package of 8 weekly sessions. The form below offers courses for beginner 1 and beginner 2. As the courses progress more courses will become available.
+	 On submitting the form you will be emailed to confirm your booking and complete payment. Please note, it is only possible to do sign up for level 2 once level 1 has been completed.</p>
 
-	<div class="container-inner">			
-		<div class="ticket-form">
-			<form role='form' method="post" class='form-inline'>
+	<div class="container-inner">	
+		<center>		
+			<div class="ticket-form">
+				<form role='form' method="post" class='form-inline'>
 
-	    		<input type="text" class='form-control' name="name" placeholder="Name" >
-	    		
-	    		<input type="text" class='form-control' name="email" placeholder="Email" >
-	    		<br>
+		    		<input type="text" class='form-control' name="name" placeholder="Name" >
+		    		<br>
+		    		<input type="text" class='form-control' name="email" placeholder="Email" >
+		    		<br>
 
-	    		<p>Please select your preferred starting date and ability level. 
+		    		<p>Please select your preferred starting date and ability level. 
 
-				<table class="table table-hover">
-					<tr>
-					  <td>	</td>
-					  <td>Beginner</td>
-					  <td>Intermediate</td> 
-					  <td>Expert</td>
-					</tr>
-					<tr>
-					  <td>
-					  	<div class="panel-group" id="accordion4">
-						  	<div class="panel panel-default">
-						    	<div class="panel-heading">
-						     		<h4 class="panel-title">
-						        		<a data-toggle="collapse" data-parent="#accordion4" href="#collapseFour">
-						          			September
-						       		 	</a>
-						     		</h4>
-						    	</div>
-						    	<div id="collapseFour" class="panel-collapse collapse">
-						      		<div class="panel-body">
-						        		Dates: <br> Sept 10th..
-						     		</div>
-						    	</div>
-						  </div>
-						</div>
-					  </td>
-					  <td>
-							<input type="radio"  name="class" value="sep beg">
-					  </td> 
-					  <td>
-							<input type="radio"  name="class" value="sep int">				
-					  </td>
-					  <td>	
-							<input type="radio"  name="class" value="sep exp">
-					  </td>
-					</tr>
-					<tr>
-					  <td>
-					  	<div class="panel-group" id="accordion2">
-						  	<div class="panel panel-default">
-								<div class="panel-heading">
-	  								<h4 class="panel-title">
-	    								<a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-	      									October
-	    								</a>
-	  								</h4>
-								</div>
-								<div id="collapseTwo" class="panel-collapse collapse">
-	  								<div class="panel-body">
-	    								Dates: <br>
-	    								 Oct 10th, 17th... 
-	  								</div>
-								</div>
-	 						</div>
-	 					</div>
-					  </td>
-					  <td>
-							<input type="radio"  name="class" value="oct beg">
-					  </td> 
-					  <td>
-							<input type="radio"  name="class" value="oct int">			
-					  </td>
-					  <td>					  	
-							<input type="radio"  name="class" value="oct exp">				
-					  </td>
-					</tr>
-					<tr>
-					    <td>
-					    	<div class="panel-group" id="accordion3">
+					<table class="table table-hover">
+						<tr>
+						  <td></td>
+						  <td>Beginner level 1, 6pm session</td>
+						  <td>Spaces remaining</td>
+						  <td></td>
+						  <td>Beginner level 2, 7pm session</td> 
+						  <td>Spaces remaining</td>
+						  <td></td>
+						  <td>Beginner level 1, 8pm session</td> 
+						  <td>Spaces remaining</td>					  
+						</tr>
+						<tr>
+						  <td>Sessions beginning Sept 12th
+						  	<!-- <div class="panel-group" id="accordion4">
 							  	<div class="panel panel-default">
-	    							<div class="panel-heading">
-	      								<h4 class="panel-title">
-	        								<a data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">
-	          									November
-	        								</a>
-	      								</h4>
-	    							</div>
-	    							<div id="collapseThree" class="panel-collapse collapse">
-	      								<div class="panel-body">
-	        								Dates: <br>
-	        								 Nov 10th, 17th... 
-	      								</div>
-	    							</div>
+							    	<div class="panel-heading">
+							     		<h4 class="panel-title">
+							        		<a data-toggle="collapse" data-parent="#accordion4" href="#collapseFour">
+							          			September
+							       		 	</a>
+							     		</h4>
+							    	</div>
+							    	<div id="collapseFour" class="panel-collapse collapse">
+							      		<div class="panel-body">
+							        		Beginning  <br> Sept 10th..
+							     		</div>
+							    	</div>
+							  </div>
+							</div> -->
+						  </td>
+						  <td>
+								<input type="radio"  name="class" value="september beginner 1 6pm">
+						  </td> 
+						  <td>
+								<%= @sept_beg_1_6	%>
+						  </td>
+						  <td>       </td>					  
+						  <td>
+								<input type="radio"  name="class" value="september beginner 2 7pm">				
+						  </td>
+						  <td>
+								<%= @sept_beg_2_7	%>
+						  </td>
+						  <td>       </td>
+						  <td>
+								<input type="radio"  name="class" value="september beginner 1 8pm">				
+						  </td>
+						  <td>
+								<%= @sept_beg_2_7	%>
+						  </td>						  
+	<!-- 					  <td>	
+								<input type="radio"  name="class" value="september experienced">
+						  </td> -->
+						</tr>
+						<tr>
+						  <td>Sessions beginning Nov 14th
+						  	<!-- <div class="panel-group" id="accordion2">
+							  	<div class="panel panel-default">
+									<div class="panel-heading">
+		  								<h4 class="panel-title">
+		    								<a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+		      									October
+		    								</a>
+		  								</h4>
+									</div>
+									<div id="collapseTwo" class="panel-collapse collapse">
+		  								<div class="panel-body">
+		    								Dates: <br>
+		    								 Oct 10th, 17th... 
+		  								</div>
+									</div>
 		 						</div>
-		 					</div>
-					    </td>
-					  <td>					  	
-							<input type="radio"  name="class" value="nov beg">			
-					  </td> 
-					  <td>					 
-							<input type="radio"  name="class" value="nov int">			
-					  </td>
-					  <td>					  
-							<input type="radio"  name="class" value="nov exp">
-					  </td>
-					</tr>
-				</table>
+		 					</div> -->
+						  </td>
+						 <td>
+								<input type="radio"  name="class" value="november beginner 1 6pm">
+						  </td> 
+						  <td>
+								<%= @nov_beg_1_6	%>
+						  </td>
+						  <td></td>					  
+						  <td>
+								<input type="radio"  name="class" value="november beginner 2 7pm">				
+						  </td>
+						  <td>
+								<%= @nov_beg_2_7	%>
+						  </td>
+						  <td></td>
+						  <td>
+								<input type="radio"  name="class" value="november beginner 1 8pm">				
+						  </td>
+						  <td>
+								<%= @nov_beg_2_7	%>
+						  </td>						  
+	<!-- 					  <td>	
+								<input type="radio"  name="class" value="september experienced">
+						  </td> -->
+						</tr>
+						<!-- <tr>
+						    <td>
+						    	<div class="panel-group" id="accordion3">
+								  	<div class="panel panel-default">
+		    							<div class="panel-heading">
+		      								<h4 class="panel-title">
+		        								<a data-toggle="collapse" data-parent="#accordion3" href="#collapseThree">
+		          									November
+		        								</a>
+		      								</h4>
+		    							</div>
+		    							<div id="collapseThree" class="panel-collapse collapse">
+		      								<div class="panel-body">
+		        								Dates: <br>
+		        								 Nov 10th, 17th... 
+		      								</div>
+		    							</div>
+			 						</div>
+			 					</div>
+						    </td>
+						  <td>					  	
+								<input type="radio"  name="class" value="nov beg">			
+						  </td> 
+						  <td>					 
+								<input type="radio"  name="class" value="nov int">			
+						  </td>
+						  <td>					  
+								<input type="radio"  name="class" value="nov exp">
+						  </td>
+						</tr> -->
+					</table>
 
-				<input type="checkbox" name="terms" value="confirm">Please tick to agree and comply with our <a href="terms_and_conditions">Terms and Conditions</a>
-
-	    		<button type="submit" class='btn btn-success'>Confirm Booking</button>
-	    	</form> 
-		</div>
+					<input type="checkbox" name="terms" value="confirm">Please tick to agree and comply with our <a href="disclaimer">disclaimer</a>
+					<br>
+					<br>
+		    		<button type="submit" class='btn btn-success'>Confirm Booking</button>
+		    	</form> 
+			</div>
+		</center>
     </div>
 </div>
 

@@ -22,3 +22,11 @@ hr{
     color: white;
     text-align: center;
 }
+
+.container-main{
+    margin-bottom: 20px;
+}
+
+ul.dropdown-menu {
+background-color: #aaa;
+}
