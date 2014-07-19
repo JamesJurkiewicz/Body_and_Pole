@@ -3,7 +3,6 @@ require 'pony'
 require 'json'
 require 'rubygems'
 require 'google_drive'
-require 'mail'
 
 get '/'  do
   erb :index
@@ -67,54 +66,69 @@ post '/sign_up' do
   @level=  params[:class].split[1..2].join
   date=   params[:class].split.first
   
-
+  if classes=="september beginner 1 6pm"
+    i=2
+    elsif classes=="september beginner 2 7pm"
+    i=3
+   elsif classes=="september beginner 1 8pm"
+    i=4
+   elsif classes=="november beginner 1 6pm"
+    i=5
+   elsif classes=="november beginner 2 7pm"
+    i=6
+   elsif classes=="november beginner 2 8pm"
+    i=7
+  end
+  puts "THE VALUE FOR I AND SPREADSHEET VALUE ARE:"
+  puts i 
+  #puts p ws[i.to_i,8]
   session = GoogleDrive.login("james.jurkiewicz12@gmail.com", "JboSelect1")
-
-    # First worksheet of
-    # https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
     ws = session.spreadsheet_by_key("1aqlkV2gAxOQ_Bpd_E43fBJpF9KMb47OLxV9fqGvwOcw").worksheets[0]
-      # Dumps all cells.
-      for row in ws.num_rows+1..ws.num_rows+1
-        for col in 1..ws.num_cols
-         ws[row, 1]= @name
-         ws[row, 2]= @email
-         ws[row, 3]= params[:class]
+      @i=ws[i.to_i,8].to_i
+      puts @i
+
+  if @i >= 1 
+
+    session = GoogleDrive.login("james.jurkiewicz12@gmail.com", "JboSelect1")
+
+      # First worksheet of
+      # https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
+      ws = session.spreadsheet_by_key("1aqlkV2gAxOQ_Bpd_E43fBJpF9KMb47OLxV9fqGvwOcw").worksheets[0]
+        # Dumps all cells.
+        for row in ws.num_rows+1..ws.num_rows+1
+          for col in 1..ws.num_cols
+           ws[row, 1]= @name
+           ws[row, 2]= @email
+           ws[row, 3]= params[:class]
+           ws[row, 4]= params[:disclaimer]
+          end
         end
-      end
-      ws.save
+        ws.save
 
-      if classes=="september beginner 1 6pm"
-        i=2
-        elsif classes=="september beginner 2 7pm"
-        i=3
-        elsif classes=="september beginner 1 8pm"
-        i=4
-        elsif classes=="november beginner 1 6pm"
-        i=5
-        elsif classes=="november beginner 2 7pm"
-        i=6
-        elsif classes=="november beginner 2 8pm"
-        i=7
-      end
-      puts ws[i,8]
+      Pony.mail(
+        :to => @email,
+        :subject => "Body and Pole Guernsey confirmation",
+        :body => erb(:email, :layout => false),
+      # :bcc => anneka@...
+        :attachments => {"H&F_Declaration.docx" => File.read("public/H&F_Declaration.docx")},
+        :via => 'smtp',
+        :from => 'Body and Pole Guernsey',
+        :via => :smtp,
+        :via_options => {
+          :address              => 'smtp.gmail.com',
+          :port                 => '587',
+          :enable_starttls_auto => true,
+          :user_name            => 'james.jurkiewicz12',
+          :password             => 'JboSelect1',
+          :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
+          :domain               => "localhost.localdomain" # the HELO domain provided by the client to the server
+      })
 
-    if ws[i,8].to_i >= 0 
+    erb :thankyou
 
-=begin
-      Pony.mail( 
-          :to => @email,
-          #:bcc => "anneka@",
-          :subject => "Body and Pole Guernsey confirmation",
-          :body => erb(:email, :layout => false),
-        # :attachments => {File.basename("#{H&F_Declaration}") => File.read("#{H&F_Declaration}")},
-        # :attachments => {"H&F_Declaration.docx" => File.read("/H&F_Declaration.docx"), "hello.txt" => "hello!"}   
-          )
-  =end
-=end
-    Pony.mail(:to => 'james.jurkiewicz12@gmail.com', :via => :smtp, :subject => "Wow - an email", :body=>"Hi. This is your program speaking. Bye.")
-      erb :thankyou
-    else 
+  else
+
       erb :failure
-    end
-
-end 
+      
+  end
+end
