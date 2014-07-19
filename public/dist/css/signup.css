@@ -50,5 +50,9 @@ td{
 }
 
 form{
-	border-radius: 20px
+	border-radius: 20px;
+}
+
+.disc{
+	margin: 20px 20px;
 }

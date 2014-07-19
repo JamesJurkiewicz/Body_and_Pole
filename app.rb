@@ -29,6 +29,11 @@ get '/information' do
   erb :information
 end
 
+get '/disclaimer' do 
+  erb :disclaimer
+end
+
+
 get '/sign_up'  do
 
    session = GoogleDrive.login("james.jurkiewicz12@gmail.com", "JboSelect1")
@@ -63,8 +68,14 @@ post '/sign_up' do
   classes = params[:class] 
   @name=   params[:name].split.first.capitalize
   @email=  params[:email]
-  @level=  params[:class].split[1..2].join
+  @level=  params[:class].split[1]+" "+params[:class].split[2]
   date=   params[:class].split.first
+
+  if params[:class].split[2]=1
+    @cost=80
+  else
+    @cost=85
+  end
   
   if classes=="september beginner 1 6pm"
     i=2
