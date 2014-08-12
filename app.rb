@@ -36,7 +36,7 @@ end
 
 get '/sign_up'  do
 
-   session = GoogleDrive.login("james.jurkiewicz12@gmail.com", "JboSelect1")
+   session = GoogleDrive.login("bodyandpole.gsy@gmail.com", "9carryonbrynn99")
     #First worksheet of
     #https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
     ws = session.spreadsheet_by_key("1aqlkV2gAxOQ_Bpd_E43fBJpF9KMb47OLxV9fqGvwOcw").worksheets[0]
@@ -93,14 +93,14 @@ post '/sign_up' do
   puts "THE VALUE FOR I AND SPREADSHEET VALUE ARE:"
   puts i 
   #puts p ws[i.to_i,8]
-  session = GoogleDrive.login("james.jurkiewicz12@gmail.com", "JboSelect1")
+  session = GoogleDrive.login("bodyandpole.gsy@gmail.com", "9carryonbrynn99")
     ws = session.spreadsheet_by_key("1aqlkV2gAxOQ_Bpd_E43fBJpF9KMb47OLxV9fqGvwOcw").worksheets[0]
       @i=ws[i.to_i,8].to_i
       puts @i
 
   if @i >= 1 
 
-    session = GoogleDrive.login("james.jurkiewicz12@gmail.com", "JboSelect1")
+    session = GoogleDrive.login("bodyandpole.gsy@gmail.com", "9carryonbrynn99")
 
       # First worksheet of
       # https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
@@ -129,8 +129,8 @@ post '/sign_up' do
           :address              => 'smtp.gmail.com',
           :port                 => '587',
           :enable_starttls_auto => true,
-          :user_name            => 'james.jurkiewicz12',
-          :password             => 'JboSelect1',
+          :user_name            => 'bodyandpole.gsy@gmail.com',
+          :password             => '9carryonbrynn99',
           :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
           :domain               => "localhost.localdomain" # the HELO domain provided by the client to the server
       })
