@@ -5,7 +5,7 @@
           :address              => 'smtp.gmail.com',
           :port                 => '587',
           :enable_starttls_auto => true,
-          :user_name            => 'james.jurkiewicz12',
-          :password             => 'JboSelect1',
+          :user_name            => 'bodyandpole.gsy',
+          :password             => '9carryonbrynn99',
           :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
           :domain               => "localhost.localdomain" # the HELO domain provided by the client to the server

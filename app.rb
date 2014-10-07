@@ -38,15 +38,15 @@ get '/sign_up'  do
 
    session = GoogleDrive.login("bodyandpole.gsy@gmail.com", "9carryonbrynn99")
     #First worksheet of
-    #https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
-    ws = session.spreadsheet_by_key("1aqlkV2gAxOQ_Bpd_E43fBJpF9KMb47OLxV9fqGvwOcw").worksheets[0]
+    # https://docs.google.com/spreadsheets/d/1eiEXfZT4PNEdO3tScgJ1toQEwRxZdL_j5X12sNvnP8o/edit#gid=0
+    ws = session.spreadsheet_by_key("1eiEXfZT4PNEdO3tScgJ1toQEwRxZdL_j5X12sNvnP8o").worksheets[0]
 
-    @sept_beg_1_6 = ws[2,8]
-    @sept_beg_2_7 = ws[3,8] 
-    @sept_beg_1_8 = ws[4,8]
-    @nov_beg_1_6 = ws[5,8] 
-    @nov_beg_2_7 = ws[6,8]
-    @nov_beg_1_8 = ws[7,8] 
+    @nov_beg_3_6 = ws[2,8]
+    @nov_beg_2_7 = ws[3,8] 
+    @nov_beg_1_8 = ws[4,8]
+    @jan_beg_1_6 = ws[5,8] 
+    @jan_beg_1_7 = ws[6,8]
+    @jan_beg_2_8 = ws[7,8] 
 
 
   erb :sign_up
@@ -77,24 +77,24 @@ post '/sign_up' do
     @cost=85
   end
   
-  if classes=="september beginner 1 6pm"
+  if classes=="november 7th 2014 beginner/intermediate level 3 6pm"
     i=2
-    elsif classes=="september beginner 2 7pm"
+    elsif classes=="november 7th 2014 beginner level 2 7pm"
     i=3
-   elsif classes=="september beginner 1 8pm"
+   elsif classes=="November 7th 2014 beginner level 1 8pm"
     i=4
-   elsif classes=="november beginner 1 6pm"
+   elsif classes=="January 2015 beginner level 1 6pm"
     i=5
-   elsif classes=="november beginner 2 7pm"
+   elsif classes=="January 2015 beginner level 1 7pm"
     i=6
-   elsif classes=="november beginner 2 8pm"
+   elsif classes=="January 2015 beginner level 2 8pm"
     i=7
   end
   puts "THE VALUE FOR I AND SPREADSHEET VALUE ARE:"
   puts i 
   #puts p ws[i.to_i,8]
   session = GoogleDrive.login("bodyandpole.gsy@gmail.com", "9carryonbrynn99")
-    ws = session.spreadsheet_by_key("1aqlkV2gAxOQ_Bpd_E43fBJpF9KMb47OLxV9fqGvwOcw").worksheets[0]
+    ws = session.spreadsheet_by_key("1eiEXfZT4PNEdO3tScgJ1toQEwRxZdL_j5X12sNvnP8o").worksheets[0]
       @i=ws[i.to_i,8].to_i
       puts @i
 
@@ -103,8 +103,8 @@ post '/sign_up' do
     session = GoogleDrive.login("bodyandpole.gsy@gmail.com", "9carryonbrynn99")
 
       # First worksheet of
-      # https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
-      ws = session.spreadsheet_by_key("1aqlkV2gAxOQ_Bpd_E43fBJpF9KMb47OLxV9fqGvwOcw").worksheets[0]
+      # https://docs.google.com/spreadsheets/d/1eiEXfZT4PNEdO3tScgJ1toQEwRxZdL_j5X12sNvnP8o/edit#gid=0
+      ws = session.spreadsheet_by_key("1eiEXfZT4PNEdO3tScgJ1toQEwRxZdL_j5X12sNvnP8o").worksheets[0]
         # Dumps all cells.
         for row in ws.num_rows+1..ws.num_rows+1
           for col in 1..ws.num_cols
