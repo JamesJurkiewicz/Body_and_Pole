@@ -2,7 +2,6 @@ require 'sinatra'
 require 'pony'
 require 'json'
 require 'rubygems'
-#require 'google/api_client'
 require 'google_drive'
 
 # Authorizes with OAuth and gets an access token.

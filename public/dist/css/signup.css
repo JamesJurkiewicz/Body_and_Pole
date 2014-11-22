@@ -1,4 +1,4 @@
-/*.ticket-form{
+.ticket-form{
 	background:#111;
 	text-align: left;
 	padding:20px 20px;
@@ -37,9 +37,9 @@ background-color: rgba(240,240,240,1);
 .form-inline{
 	border-radius: 20px;
 	/*width:100%;*/
-/*	padding:20px 20px;
+	padding:20px 20px;
 }
-*/
+
 .btn{
 	margin: 20px 20px;
 }
@@ -62,4 +62,4 @@ form{
 
 .disc{
 	margin: 20px 20px;
-}*/
+}

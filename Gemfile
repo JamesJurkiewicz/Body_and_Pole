@@ -7,4 +7,4 @@ gem 'pony'
 gem 'mongoid'
 gem 'google_drive' '~>0.3.11'
 gem 'mongo'
-gem 'google-api-client' '~> 0.7.1'
+
