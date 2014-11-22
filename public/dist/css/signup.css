@@ -1,13 +1,19 @@
-.ticket-form{
-	background:#444;
+/*.ticket-form{
+	background:#111;
 	text-align: left;
+	padding:20px 20px;
+	border-radius: 10px;
+}
+
+.inner-form{
+	padding-left: 20px
 }
 
 .container-inner{
 	text-align: left;
 	padding: 20px 20px;
 	margin: 20px 20px;
-	border-radius: 5px;
+	border-radius: 10px;
 }
 
 .form-control{
@@ -30,9 +36,10 @@ background-color: rgba(240,240,240,1);
 
 .form-inline{
 	border-radius: 20px;
-	width:90%;
+	/*width:100%;*/
+/*	padding:20px 20px;
 }
-
+*/
 .btn{
 	margin: 20px 20px;
 }
@@ -55,4 +62,4 @@ form{
 
 .disc{
 	margin: 20px 20px;
-}
+}*/
