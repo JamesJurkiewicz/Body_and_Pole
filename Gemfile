@@ -5,6 +5,6 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'pony'
 gem 'mongoid'
-gem 'google_drive' '~>0.3.11'
+gem 'google_drive'
 gem 'mongo'
 
