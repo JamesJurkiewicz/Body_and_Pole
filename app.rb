@@ -55,6 +55,9 @@ get '/disclaimer' do
   erb :disclaimer
 end
 
+get '/party' do 
+  erb :party
+end
 
 get '/sign_up'  do
 
@@ -165,6 +168,63 @@ post '/sign_up' do
     else
       erb :failure  
     end
+  else 
+    erb :no_disclaimer
+  end
+end
+
+post '/party' do
+  if params[:disclaimer]= "confirmed"
+    @classes = params[:class] 
+    @name=   params[:name].split.first.capitalize
+    @email=  params[:email]
+    @date=   params[:date]
+
+    if params[:party]="5 people"
+      @cost=125
+    else
+      @cost=200
+    end
+
+    # Creates a session.
+     session = GoogleDrive.login("bodyandpole.gsy@gmail.com", "9carryonbrynn99")
+    ws = session.spreadsheet_by_key("1db4X1TId_1Bl6Zs9zaCx-iEjoLZCJCFPnQAciE1ygs8").worksheets[0]
+
+    # Dumps all cells.
+    for row in ws.num_rows+1..ws.num_rows+1
+      for col in 1..ws.num_cols
+       ws[row, 1]= @name
+       ws[row, 2]=params[:name].split(' ',2).last.capitalize
+       ws[row, 3]= @email
+       ws[row, 4]= params[:phone]
+       ws[row, 5]= params[:date]
+       ws[row, 6]= params[:party]
+       ws[row, 7]= params[:spa]
+       ws[row, 8]= params[:disclaimer]
+      end
+    end
+    ws.save
+
+    Pony.mail(
+      :to => @email,
+      :subject => "Body and Pole Gsy party confirmation",
+      :body => erb(:email_party, :layout => false),
+    # :bcc => anneka@...
+      :attachments => {"H&F_Declaration.docx" => File.read("public/H&F_Declaration.docx")},
+      :via => 'smtp',
+      :from => 'Body & Pole Limited',
+      :via => :smtp,
+      :via_options => {
+        :address              => 'smtp.gmail.com',
+        :port                 => '587',
+        :enable_starttls_auto => true,
+        :user_name            => 'bodyandpole.gsy@gmail.com',
+        :password             => '9carryonbrynn99',
+        :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
+        :domain               => "localhost.localdomain" # the HELO domain provided by the client to the server
+    })
+    erb :thankyou_party
+
   else 
     erb :no_disclaimer
   end
