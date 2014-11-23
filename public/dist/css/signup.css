@@ -1,5 +1,5 @@
 .ticket-form{
-	background:#111;
+	background:#444;
 	text-align: left;
 	padding:20px 20px;
 	border-radius: 10px;
@@ -31,7 +31,7 @@ background-color: #333;
 }
 
 input{
-background-color: rgba(240,240,240,1);
+background-color: #222;
 }
 
 .form-inline{
@@ -62,4 +62,5 @@ form{
 
 .disc{
 	margin: 20px 20px;
+	padding-right: 20px
 }
