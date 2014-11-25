@@ -30,6 +30,10 @@ get '/'  do
   erb :index
 end
 
+get '/pole_and_fitness' do
+  erb :pole_and_fitness
+end
+
 get '/index'  do
   erb :index
 end

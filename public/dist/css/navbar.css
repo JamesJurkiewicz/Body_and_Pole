@@ -6,17 +6,23 @@ ul.dropdown-menu{
 	position:relative;
 	border-radius:4px;
 	text-align: left;
-	background-color: #333;
+	background-color:#333;
+	color: red;
 	}
 	
 .dropdown-menu > li.hover {
 	background: transparent; 
 	font-weight:bold;
 	background-color:#444;
+	color: red;
 	}
 
 .navbar{
 	margin-top:20px;
 	background-color:#444;
+	color:red;
 	}
+
+.dropdown-menu>li>a {
+color: #555;
 
