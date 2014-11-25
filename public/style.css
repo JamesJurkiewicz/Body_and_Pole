@@ -31,3 +31,7 @@ ul.dropdown-menu {
 background-color: #444;
 }
 
+#messagebox {
+    width: 600px;
+    height:75px; 
+}

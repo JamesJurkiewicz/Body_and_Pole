@@ -233,3 +233,31 @@ post '/party' do
     erb :no_disclaimer
   end
 end
+
+post '/contact' do
+  @classes = params[:class] 
+  @name=   params[:name].split.first.capitalize
+  @email=  params[:email]
+  @subject=  params[:subject]
+  @message=  params[:message]
+
+  Pony.mail(
+    :to => @email,
+    :subject => "Body & Pole Gsy contact received",
+    :body => erb(:contact_email, :layout => false),
+    :bcc => "james.jurkiewicz12@gmail.com",
+    :via => 'smtp',
+    :from => 'Body & Pole Limited',
+    :via => :smtp,
+    :via_options => {
+      :address              => 'smtp.gmail.com',
+      :port                 => '587',
+      :enable_starttls_auto => true,
+      :user_name            => 'bodyandpole.gsy@gmail.com',
+      :password             => '9carryonbrynn99',
+      :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
+      :domain               => "localhost.localdomain" # the HELO domain provided by the client to the server
+  })
+
+  erb :contact_thankyou
+end
