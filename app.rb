@@ -236,7 +236,7 @@ end
 
 post '/contact' do
   @classes = params[:class] 
-  @name=   params[:name].split.first.capitalize
+  @name=   params[:name]
   @email=  params[:email]
   @subject=  params[:subject]
   @message=  params[:message]
@@ -245,7 +245,7 @@ post '/contact' do
     :to => @email,
     :subject => "Body & Pole Gsy contact received",
     :body => erb(:contact_email, :layout => false),
-    :bcc => "james.jurkiewicz12@gmail.com",
+    :bcc => 'bodyandpole.gsy@gmail.com',
     :via => 'smtp',
     :from => 'Body & Pole Limited',
     :via => :smtp,
