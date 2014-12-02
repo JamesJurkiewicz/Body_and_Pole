@@ -26,21 +26,3 @@
 	text-align: center;
 }
 
-.media-img{
-	width: 30px;
-	text-align: center;
-	margin-bottom: 20px
-}
-
-#media{
-	display: inline-block;
-	text-align: center;
-	overflow: hidden;
-	margin-bottom: 20px;
-}
-
-#media img {
-display: inline;
-margin: 0 10px;
-text-align: center;
-}

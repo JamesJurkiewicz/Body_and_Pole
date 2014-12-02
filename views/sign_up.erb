@@ -184,7 +184,19 @@
 						</div>
 						<br>
 						<br>
-			    		<button type="submit" class='btn btn-success'>Confirm Booking</button>
+			    		<button type="submit" class='btn btn-success' onclick="alert()">Confirm Booking</button>
+
+						<script>
+						function alert() {
+						    var x;
+						    if (confirm("Please check that you have completed all details on the form") == true) {
+						        x = "Thankyou";
+						    } else {
+						        x = "";
+						    }
+						    document.getElementById("demo").innerHTML = x;
+						}
+						</script>
 			    	</form> 
 				</div>
 			</div>

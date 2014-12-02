@@ -159,6 +159,17 @@ post '/sign_up' do
       end
       ws.save
 
+      # email words:
+      if @classes=="jan lvl 1 6:45pm"
+        @day == "Thursday 8th Jan"
+      elsif @classes == "jan lvl 1 7:45pm"
+        @day == "Thursday 8th Jan"
+      else
+        @day == "Friday 9th Jan"
+      end
+
+        @time= @classes.split.last
+
       Pony.mail(
         :to => @email,
         :subject => "Body and Pole Guernsey confirmation",
