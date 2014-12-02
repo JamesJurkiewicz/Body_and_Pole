@@ -43,6 +43,10 @@ get '/about_us'  do
   erb :about_us
 end
 
+get '/location'  do
+  erb :location
+end
+
 get '/classes'  do
   erb :classes
 end
@@ -61,6 +65,10 @@ end
 
 get '/party' do 
   erb :party
+end
+
+get '/conditions' do 
+  erb :conditions
 end
 
 get '/sign_up'  do
@@ -146,6 +154,7 @@ post '/sign_up' do
          ws[row, 4]= params[:phone]
          ws[row, 5]= params[:class]
          ws[row, 6]= params[:disclaimer]
+         ws[row, 7]= params[:terms]
         end
       end
       ws.save
@@ -205,6 +214,7 @@ post '/party' do
        ws[row, 6]= params[:party]
        ws[row, 7]= params[:spa]
        ws[row, 8]= params[:disclaimer]
+       ws[row, 9]= params[:terms]
       end
     end
     ws.save
