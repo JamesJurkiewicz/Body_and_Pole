@@ -129,7 +129,7 @@ post '/sign_up' do
       i=4
      elsif @classes=="jan lvl 3 8pm"
       i=5
-     elsif @classes=="jan choreography"
+     elsif @classes=="jan choreography 6pm"
       i=6
     end
     puts "THE VALUE FOR I AND SPREADSHEET VALUE ARE:"
@@ -161,14 +161,14 @@ post '/sign_up' do
 
       # email words:
       if @classes=="jan lvl 1 6:45pm"
-        @day == "Thursday 8th Jan"
+        @day = "Thursday 8th January"
       elsif @classes == "jan lvl 1 7:45pm"
-        @day == "Thursday 8th Jan"
-      else
-        @day == "Friday 9th Jan"
+        @day = "Thursday 8th January"
+      else @day = "Friday 9th January"
       end
-
+        puts @day
         @time= @classes.split.last
+        puts @time
 
       Pony.mail(
         :to => @email,
