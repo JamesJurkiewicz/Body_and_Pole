@@ -129,7 +129,7 @@ post '/sign_up' do
       i=4
      elsif @classes=="jan lvl 3 8pm"
       i=5
-     elsif @classes=="jan choreography 6pm"
+     elsif @classes=="jan lvl choreography 6pm"
       i=6
     end
     puts "THE VALUE FOR I AND SPREADSHEET VALUE ARE:"
