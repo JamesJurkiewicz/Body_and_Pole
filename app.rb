@@ -30,6 +30,10 @@ get '/'  do
   erb :index
 end
 
+get '/test' do
+  erb :test
+end
+
 get '/pole_and_fitness' do
   erb :pole_and_fitness
 end
@@ -116,9 +120,9 @@ post '/sign_up' do
     @date=   params[:class].split.first
 
     if params[:class].split[2]=1
-      @cost=80
-    else
       @cost=85
+    else
+      @cost=92
     end
     
     if @classes=="jan lvl 1 6:45pm"

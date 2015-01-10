@@ -19,7 +19,18 @@
 				<div class="inner-form">
 					<p>Please complete the following form to book a place on one of our January courses. Prices shown are for a course of 6 consecutive weeks, starting on the day given. You will be emailed a confirmation as soon as the form is submitted, and will receive a link in the next 24 hours with payment details.</p>
 
-					<form role='form' method="post" class='form-inline'>
+
+					<form role='form' method="post" class='form-inline' action="https://secure.worldpay.com/wcc/purchase">
+
+						<input type="hidden" name="testMode" value="100">
+						<!-- These first four elements are mandatory. -->
+						<input type="hidden" name="instId" value="1024645">
+						<input type="hidden" name="cartId" value="Pole lesson">
+						<input type="hidden" name="currency" value="GBP">
+						<input type="hidden" name="amount" value="0">
+						<!-- These elements below are optional. -->
+						<input type="hidden" name="desc" value="Blue T-Shirt, Medium">
+						<input type="hidden" name="name" value="CAPTURED">
 
 			    		<input type="text" class='form-control' name="name" placeholder="Name" >
 			    		<br>
@@ -155,7 +166,7 @@
 							  <td>
 							  </td>
 							  <td>
-									<input type="radio"  name="class" value="jan lvl choreography 6pm">
+									<input type="radio"  name="class" value="jan lvl choreography 6pm" >
 							  </td> 
 							  <td>
 								Choreography <br> (Level 2 and above)
@@ -184,7 +195,9 @@
 						</div>
 						<br>
 						<br>
-			    		<button type="submit" class='btn btn-success' onclick="alert()">Confirm Booking</button>
+
+			    		<button type="submit" class='btn btn-success' onclick="alert()" onclick="calc(1)">Confirm Booking</button>
+
 
 						<script>
 						function alert() {
@@ -196,8 +209,32 @@
 						    }
 						    document.getElementById("demo").innerHTML = x;
 						}
+
+						function calc(productNo)
+						{
+						if (productNo==1)
+						{
+						document.BuyForm.amount.value = 92.00;
+						document.BuyForm.desc.value = "Product 1";
+						}
+						else if (productNo==2)
+						{
+						document.BuyForm.amount.value = 10.00;
+						document.BuyForm.desc.value = "Product 2";
+						}
+						// To add a new product price, copy from here
+						else if (productNo==3)
+						{
+						document.BuyForm.amount.value = 15.00;
+						document.BuyForm.desc.value = "Product 3";
+						}
+						//...to here, and paste directly below.
+						// You will need to alter the 'productNo' and its price value.
+						}
 						</script>
-			    	</form> 
+			    	</form>
+
+
 				</div>
 			</div>
 		</center>
