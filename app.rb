@@ -77,6 +77,7 @@ end
 
 get '/sign_up'  do
 
+=begin
   #only here to remember log in deets #session = GoogleDrive.login("bodyandpole.gsy@gmail.com", "9carryonbrynn99")
   
    # Creates a session.
@@ -95,6 +96,8 @@ get '/sign_up'  do
   @jan_chor = ws[6,2] 
 
     puts @jan_1
+=end
+
   erb :sign_up
 end
 

@@ -18,11 +18,202 @@
 			<div class="ticket-form">
 				<div class="inner-form">
 					<p>Please complete the following form to book a place on one of our January courses. Prices shown are for a course of 6 consecutive weeks, starting on the day given. You will be emailed a confirmation as soon as the form is submitted, and will receive a link in the next 24 hours with payment details.</p>
+				<form role='form' method="post" class='form-inline' action="https://secure.worldpay.com/wcc/purchase">
+
+						<!-- <input type="hidden" name="testMode" value="100"> -->
+						<!-- These first four elements are mandatory. -->
+						<input type="hidden" name="instId" value="1024645">
+						<input type="hidden" name="cartId" value="Pole lesson">
+						<input type="hidden" name="currency" value="GBP">
+						<input type="hidden" name="amount" value="92.00">
+						<!-- These elements below are optional. -->
+
+			    		<input type="text" class='form-control' name="name" placeholder="Name" >
+			    		<br>
+			    		<input type="text" class='form-control' name="email" placeholder="Email" >
+			    		<br>
+			    		<input type="text" class='form-control' name="phone" placeholder="Phone" >
+			    		<br><br>
+
+						<table class="table table-hover">
+							<tr>
+							  <td></td>
+							  <td></td>
+							  <td></td>
+							  <td>Start date</td>
+							  <td>Time</td>
+							  <td>Price</td>
+							  <td>Spaces remaining</td> 
+							  <td></td>		  
+							</tr>
+							<tr>
+							  <td>
+							  	<!-- <div class="panel-group" id="accordion4">
+								  	<div class="panel panel-default">
+								    	<div class="panel-heading">
+								     		<h4 class="panel-title">
+								        		<a data-toggle="collapse" data-parent="#accordion4" href="#collapseFour">
+								          			September
+								       		 	</a>
+								     		</h4>
+								    	</div>
+								    	<div id="collapseFour" class="panel-collapse collapse">
+								      		<div class="panel-body">
+								        		Beginning  <br> Sept 10th..
+								     		</div>
+								    	</div>
+								  </div>
+								</div> -->
+							  </td>
+							  <td>
+									<input type="radio"  name="class" value="jan lvl 1 6:45pm">
+							  </td> 
+							  <td>
+								Level 1
+							  </td>
+							  <td>
+							  	Thursday 8th Jan
+							  </td>					  
+							  <td>
+									18:45-19:45				
+							  </td>
+							  <td>
+									£85				
+							  </td>
+							  <td>
+									<%= @jan_1_645	%>
+							  </td>
+							  <td>      
+							  </td>
+							</tr>					  
+							<tr>
+							  <td>
+							  </td>
+							  <td>
+									<input type="radio"  name="class" value="jan lvl 1 7:45pm">
+							  </td> 
+							  <td>
+								Level 1
+							  </td>
+							  <td>
+							  	Thursday 8th Jan
+							  </td>					  
+							  <td>
+									19:45-20:45				
+							  </td>
+							  <td>
+									£85				
+							  </td>
+							  <td>
+									<%= @jan_1_745	%>
+							  </td>
+							  <td>      
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							  </td>
+							  <td>
+									<input type="radio"  name="class" value="jan lvl 2 7pm">
+							  </td> 
+							  <td>
+								Level 2
+							  </td>
+							  <td>
+							  	Friday 9th Jan
+							  </td>					  
+							  <td>
+									19:00-20:00				
+							  </td>
+							  <td>
+									£92			
+							  </td>
+							  <td>
+									<%= @jan_2_7	%>
+							  </td>
+							  <td>      
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							  </td>
+							  <td>
+									<input type="radio"  name="class" value="jan lvl 3 8pm">
+							  </td> 
+							  <td>
+								Level 3
+							  </td>
+							  <td>
+							  	Friday 9th Jan
+							  </td>					  
+							  <td>
+									20:00-21:00				
+							  </td>
+							  <td>
+									£92			
+							  </td>						  
+							  <td>
+									<%= @jan_3_8	%>
+							  </td>
+							  <td>      
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							  </td>
+							  <td>
+									<input type="radio"  name="class" value="jan lvl choreography 6pm" >
+							  </td> 
+							  <td>
+								Choreography <br> (Level 2 and above)
+							  </td>
+							  <td>
+							  	Friday 9th Jan
+							  </td>					  
+							  <td>
+									18:00-19:00				
+							  </td>
+							  <td>
+									£92				
+							  </td>
+							  <td>
+									<%= @jan_chor	%>
+							  </td>
+							  <td>      
+							  </td>
+							</tr>						
+						</table>
+						<div class="disc">
+							<input type="checkbox" name="disclaimer" value="confirmed" class="disc">Please tick to agree and comply with our <a href="disclaimer">disclaimer</a>
+						</div>
+						<div class="terms">
+						<input type="checkbox" name="terms" value="confirmed" class="disc">Please tick to agree and comply with our <a href="conditions">terms and conditions</a>
+						</div>
+						<br>
+						<br>
+
+			    		<button type="submit" class='btn btn-success' onclick="alert()">Confirm Booking</button>
 
 
-					
+						<script>
+						function alert() {
+						    var x;
+						    if (confirm("Please check that you have completed all details on the form") == true) {
+						        x = "Thankyou" }
+						    else {
+						        x = "";
+						    }
+						    document.getElementById("demo").innerHTML = x;
+						}
 
-
+/*						function calc(productNo) {
+							if (productNo==1) {
+								document.BuyForm.amount.value = 92.00;
+								document.BuyForm.desc.value = "Product 1";
+							}
+						}*/
+						</script>
+			    	</form>
 				</div>
 			</div>
 		</center>
