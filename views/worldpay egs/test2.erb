@@ -1,0 +1,209 @@
+<!-- HTML Select Junior Example 0.3                                                           -->
+<!-- Please note the code on these pages are provided by WorldPay as working examples only.   -->
+<!-- Any changes you make to the copies of these pages will not be supported by WorldPay.     -->
+<!-- For further information on reading html see the supplied help section.                   -->
+
+<html>
+<!-- The name, style, and properties of the page are defined in the 'head' tags. -->
+<head>
+	<title>HTML Redirect Example 0.3</title>
+	<meta http-equiv="Content-Type" content="text/html">
+	<meta name="description" content="Junior HTML Example 0.3">
+	<meta name="keywords" content="Junior, html">
+	<style type="text/css"> td {text-align:"left"; vertical-align:"middle"; font-family:"arial"; color:"black"} h1,h2,h3,h4,h5,h6,h7 {text-align:"center"; vertical-align:"middle"; font-family:"arial"; color:"black"}</style>
+</head>
+
+<!-- The content to be used on the page is placed between the 'body' tags. -->
+<body>
+
+
+<!-- JavaScript is used to give functionality to some of the pages elements. -->
+<script language=JavaScript>
+
+<!-- There is only one section of this JavaScript which needs to change when adding new products. This has been highlighted by annotation. -->
+
+function Product(descrip, money)
+{
+	this.description = descrip;
+	this.price = money;
+}
+
+function createArray(size)
+{
+	for (var i=0; i < size; i++)
+	{
+		this[i] = null;
+	}
+
+	return this;
+}
+
+function Category(name)
+{
+	this.title = name;
+	this.product = new createArray(1);
+	this.product[0] = new Product("No item selected", 0.00);
+}
+
+var category = new createArray(1);
+
+<!-- LOOK HERE! To add new products change this section, from START to END. -->
+<!-- START -->
+<!-- Each drop down list has a section. Copy a section, changing its category name, product names, and product prices. -->
+
+category[1] = new Category("Category 1");
+category[1].product[1] = new Product("Item 1", 5.00);
+category[1].product[2] = new Product("Item 2", 10.00);
+category[1].product[3] = new Product("Item 3", 15.00);
+
+category[2] = new Category("Category 2");
+category[2].product[1] = new Product("Item 4", 5.00);
+category[2].product[2] = new Product("Item 5", 10.00);
+category[2].product[3] = new Product("Item 6", 15.00);
+
+category[3] = new Category("Category 3");
+category[3].product[1] = new Product("Item 7", 5.00);
+category[3].product[2] = new Product("Item 8", 10.00);
+category[3].product[3] = new Product("Item 9", 15.00);
+<!-- END -->
+
+function SetLengths()
+{
+	var k=1;
+	while(category[k] != null)
+	{
+		k++;
+	}
+
+	category.length = k;
+		
+	for (i=1; i<category.length; i++)
+	{
+		var j=1;
+
+			while (category[i].product[j] != null)
+			{
+				j++;
+			}
+
+		category[i].product.length = j;
+	}
+}
+
+SetLengths();
+
+function writeTableRow(i)
+{
+	document.write('<tr><td>' + category[i].title + ': '  + '<select size="1" name="menu' + i + '" onChange="update(' + i + ')">');
+	len = category[i].product.length;
+
+	for (j=0; j<len; j++)
+	{
+		if (j != 0)
+		{
+			document.write('<option>' + category[i].product[j].description + ' - £' + fix(category[i].product[j].price) + '</option>');
+		}		
+		else
+		{
+			document.write('<option selected value=" ">No item selected</option>');
+		}
+
+	}
+
+	document.write('</select></td><td>' + '<input type="text" value="0.00" name="price' + i + '" '  + 'size=3 onFocus="document.CalcForm.price' + i + '.blur()">' + '</td></tr>');
+}
+
+function writeTable()
+{
+	// Draws the whole table using iterative calls to writeTableRow(i) + plus the special case of the last row!
+	document.write('<table align=center cellpadding=3 border=2>');
+
+	for (i=1; i<category.length; i++)
+	{
+		writeTableRow(i);
+	}
+
+	document.write('<tr><td style=text-align:right><b>Total: </b></td><td><input type="text" ' + 'name="total" size=3 value="0.00"></td></tr></table>');
+}
+
+function update(num)
+{
+	eval('selected = document.CalcForm.menu' + num + '.selectedIndex;');
+	cost = fix(category[num].product[selected].price);
+	eval('document.CalcForm.price' + num + '.value = cost;');
+	var grand_total = 0;
+	var description = "";
+	var first = 1;
+
+	for (i=1; i<category.length; i++)
+	{
+		eval('grand_total += parseFloat(document.CalcForm.price' + i + '.value);');
+		eval('selected = document.CalcForm.menu' + i + '.selectedIndex;');
+
+		if(category[i].product[selected].description !=  "Please Select a Product" )
+		{
+			if(first == 1)
+			{
+				description = category[i].product[selected].description;
+				first = 2;
+			}
+			else
+			{
+				description = description + " + " + category[i].product[selected].description;
+			}
+		}
+	}
+
+	document.CalcForm.total.value = fix(grand_total);
+	document.BuyForm.amount.value = fix(grand_total);
+	document.BuyForm.desc.value = description;
+}
+
+function fix(num)
+{
+	string = "" + num;
+
+	if (string.indexOf('.') == -1) 
+	{
+		return string + '.00';
+	}
+
+	seperation = string.length - string.indexOf('.');
+
+	if (seperation > 3)
+	{
+ 		return string.substring(0,string.length-seperation+3);
+	}
+	else if (seperation == 2)
+	{
+		return string + '0';
+	}
+
+	return string;
+}
+
+</script>
+
+<h1>Item Combination Shop</h1>
+
+<!-- These lines generate the product table. It does not need to be altered when adding or removing products. -->
+<form name="CalcForm">
+<script language=JavaScript>writeTable();</script>
+</form>
+
+<!-- This is a purchase token, for more information on the elements with in a purchase token see the supplied help section. -->
+<!-- PLEASE NOTE: this is a test installation and values will require changing to reflect merchants requirements -->
+<form action="https://secure-test.worldpay.com/wcc/purchase" method="post" name="BuyForm"> 
+<input type="hidden" name="instId"  value="211616"><!-- The "instId" value "211616" should be replaced with the Merchant's own installation Id --> 
+<input type="hidden" name="cartId"  value="abc123"><!-- This is a unique identifier for merchants use. Example: PRODUCT123 -->
+<input type="hidden" name="currency"  value=GBP><!-- Choose appropriate currency that you would like to use --> 
+<input type="hidden" name="desc"  value="Goods">
+<input type="hidden" name="amount"  value="0">
+<input type="hidden" name="testMode"  value="100">
+
+<!-- This generates a button that submits the information and sends the user to the Worldpay payment pages. -->
+<p align="center"><input type="submit" value="Purchase"></p>
+
+</form>
+</body>
+</html>

@@ -31,7 +31,7 @@ get '/'  do
 end
 
 get '/test' do
-  erb :test
+  erb :test3
 end
 
 get '/pole_and_fitness' do

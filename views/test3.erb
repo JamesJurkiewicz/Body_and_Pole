@@ -1,0 +1,714 @@
+<!-- HTML Select Junior Example 2                                                             -->
+<!-- Please note the code on these pages are provided by WorldPay as working examples only.   -->
+<!-- Any changes you make to the copies of these pages will not be supported by WorldPay.     -->
+<!-- For further information on reading html see the supplied help section.                   -->
+
+<html>
+<!-- The name, style, and properties of the page are defined in the 'head' tags. -->
+<head>
+	<title>HTML Redirect Example 2</title>
+	<link rel="stylesheet" type="text/css" href="jr_example2_style.css">
+	<meta http-equiv="Content-Type" content="text/html">
+	<meta name="description" content="Junior HTML Example 2">
+	<meta name="keywords" content="Junior, html">
+</head>
+
+<!-- The content to be used on the page is placed between the 'body' tags. -->
+<body>
+
+<!-- JavaScript is used to give functionality to some of the pages elements. -->
+<script language="JavaScript">
+
+<!-- hide from oldie browsers
+function defocus(x)
+{
+	document.BuyForm.qty2.focus();
+}
+
+<!-- The next two functions round numbers to numerical formatting. -->
+function roundOff(value, precision)
+{
+	return places(value,1,precision);
+}
+
+function places(X, M, N) 
+{
+	var T, S=new String(Math.round(X*Number("1e"+N)))
+	while (S.length<M+N) S='0'+S
+	var y = S.substr(0, T=(S.length-N));
+	if(N>0) 
+	{
+		y += '.' + S.substr(T, N);
+	}
+
+	return y;
+}
+
+<!-- This function checks for empty quantities. -->
+function CheckNull(value)
+{
+	if (value == "")
+	{
+		value = "0";
+	}
+
+	return value;
+}
+
+<!-- This function defines the postage and packaging location. -->
+function typeOfCarriage(x,whereabouts)
+{
+	x.carriage_amount.value = whereabouts;
+}
+
+<!-- This function addeds the postage and packaging to the total price of the products. To see an example of adding postage and packaging rates to this page see example 0.4 -->
+function calculate(x)
+{
+	basicprice = calc(x);
+
+	if(Number(basicprice) > 0)
+	{
+
+		switch (x.carriage_amount.value)
+		{
+			case "uk" :
+				x.postage_and_packaging.value = 3.75;
+				break
+			case "europe" :
+				x.postage_and_packaging.value = 4.75;
+				break
+			default :
+				x.postage_and_packaging.value = 5.75;
+				break;
+		}
+
+		x.amount.value = Number(basicprice) + Number(x.postage_and_packaging.value);
+		x.desc.value = add_items(x);
+	}
+	else
+	{
+		x.amount.value = "0";
+	}
+
+	x.amount.value = roundOff(x.amount.value,2);
+}
+
+<!-- The standard price, exluding postage and packaging is calculated here. -->
+function calc(x)
+{
+	x.amount.value = 0;
+	var y = x.price.length;
+	var z = x.qty.length;
+	var a = Number(x.amount.value);
+	var b,c,d;
+	d = true;
+
+	while(y > 0)
+	{
+		b = Number(CheckNull(x.price[y-1].value));
+		c = Number(CheckNull(x.qty[y-1].value));
+		if(c < 0)
+		{
+			d = false;
+			c = 0;
+			x.qty[y-1].value = c;
+		}
+
+		a += (b * c);
+		y--;
+	}
+
+	if(d == false)
+	{
+		alert("Negative quantities not permitted; these have been set to zero.");
+	}
+
+	return a;
+}
+
+<!-- These two functions add the items descriptions and prices, to be sent to the WorldPay secure server. -->
+function add_items(x)
+{
+	var y = x.price.length;
+	var z = x.code.length;
+	var d = "";
+	if(y != z) alert("Missing items in form; found "+y+" occurrences of price and "+z+" of code.");
+	var c = 0;
+
+	while (c < y)
+	{
+		if(Number(CheckNull(x.qty[c].value)) > 0)
+		{
+			d += add_item(d,x.qty[c].value,x.code[c].value);
+		}
+
+		c++;
+	}
+
+	return d;
+}
+
+function add_item(d,q,c)
+{
+	var r = "";
+	if(d != "")
+	{
+		r += ", ";
+	}
+
+	r += q + " " + c;
+
+	if(Number(CheckNull(q)) > 1) 
+	{
+		r += "'s";
+	}
+
+	return r;
+}
+
+<!-- This validates the details input by the customer. This is where you may wish to include more sophisticated checking in the 'if' arguments if you wish. -->
+function validate_form(x)
+{
+	var e = "";
+	var r = true;
+	var z,n,q,t;
+
+	t = true;
+	q = 0;
+	n = 0;
+	z = 0;
+
+	while(z < x.qty.length)
+	{
+		if(Number(CheckNull(x.qty[z].value)) < 0)
+		{
+			n++;
+		}
+		else 
+		{
+			q += Number(CheckNull(x.qty[z].value));
+		}
+
+		z++;
+	}
+
+	if(n > 0)
+	{
+		e += "\nYou have entered "+n+" negative quantit";
+		if(n == 1)
+		{
+			e += "y.";
+		}
+		else
+		{
+			e += "ies.";
+		}
+
+		r = false;
+	}
+
+	if(q == 0)
+	{
+		e += "\nYou need to select at least one item.";
+		r = false;
+	}
+	
+	<!-- In these 'if' statements if the customer has not entered anything in the named field, then an error message will be displayed. -->
+	if(x.name.value == "") 
+	{
+		e += "\nPlease enter a name.";
+		r = false;
+	}
+
+
+	if(x.address.value == "") 
+	{
+		e += "\nPlease enter an address.";
+		r = false;
+	}
+
+	if(x.country.value == "") 
+	{
+		e += "\nPlease select a country.";
+		r = false;
+	}
+
+	if(x.postcode.value == "") 
+	{
+		e += "\nPlease enter a postcode or ZIP code.";
+		r = false;
+	}
+
+	if(x.tel.value == "")
+	{
+		e += "\nPlease enter a telephone number.";
+		r = false;
+	}
+
+	if(x.fax.value == "") 
+	{
+		e += "\nPlease enter a fax number.";
+		r = false;
+	}
+
+	if(x.email.value == "")
+	{
+		e += "\nPlease enter an e-mail address.";
+		r = false;
+	}
+
+	if(r == false) 
+	{
+		alert("The following must be completed first:\n"+e);
+	}
+
+	return r;
+}
+
+// -->
+</script>
+
+<!-- This is a purchase token, for more information on the elements with in a purchase token see the supplied help section. -->
+<!-- The validation has taken place with in the next line. -->
+<!-- PLEASE NOTE: this is a test installation and values will require changing to reflect merchants requirements -->
+<FORM action="https://secure-test.worldpay.com/wcc/purchase" method=post name=BuyForm onSubmit="return validate_form(document.BuyForm);">
+<input name="instId" type="hidden" value="211618"><!-- The "instId" value "211618" should be replaced with the Merchant's own installation Id -->
+<input name="cartId" type="hidden" value="abc123"><!-- This is a unique identifier for merchants use. Example: PRODUCT123 -->
+<input name="currency" type="hidden" value="GBP"><!-- Choose appropriate currency that you would like to use --> 
+<input name="desc" type="hidden" value=""> 
+<input name="testMode" type="hidden" value="100">
+<input name="hideContact" type="hidden">
+<input name="hideCurrency" type="hidden">
+
+<!-- This table is the company logo at the top of the page, and is copied directly into the payment page header. -->
+<table align="center">
+<tr>
+	<td><h1>www.</h1></td>
+	<td width="15"><img src="images/mouse_logo.jpg" alt="Mouse mat company logo"></td>
+	<td><h1>.com</h1></td>
+</tr>
+</table>
+
+<table cellPadding="3" cellSpacing="3" align="center">
+<tr>
+	<!-- This is the left hand page line divider. -->
+	<td style="background-image:url('images/line.jpg')"></td>
+	<td valign="top" width="520">
+
+	<!-- Start of Product List -->
+	<table>
+	<tr>
+	<td><img src="images/menu.jpg" width="520" alt="Example menu layout"></td>
+	</tr>
+
+	<!-- Start of product 1 -->
+	<tr>
+		<td>
+		<table cellPadding="3" width="520">
+		<tr bgColor="powderblue">
+			<!-- This is the product title. -->
+			<td colSpan=3><h3>Small Mouse Mat</h3><input name="code" type="hidden" value="SMM"><input name="description" type="hidden" value="Small Mouse Mat"></td>
+		</tr>
+		<tr>
+			<!-- This is the product image. -->
+			<td rowSpan="6" width="120" bgColor="powderblue" style="valign:middle; text-align:center"><img src="images/s_mouse.jpg" alt="Small mouse mat"></td>
+		</tr>
+		<!-- The next four parts to the table are the product details. -->
+		<tr>
+			<td><b>Dimensions</b> - 15cm x 20cm</td>
+		</tr>
+		<tr>
+			<td><b>Ref</b> - SMM</td>
+		</tr>
+		<tr>
+			<td><b>Features</b> - Flat, smooth surface, &amp; soft foam underside.<br></td>
+		</tr>
+		<tr>
+			<td><b>Cost<input name="price" type="hidden" value="4.99"> - &pound;4.99</b></td>
+		</tr>
+		<tr>
+			<!-- This is where the customer enters the quantity. -->
+			<td><b>Quantity: </b><input name="qty" size="3" value="0" onBlur="calculate(this.form);"></td>
+		</tr>
+		</table>
+		</td>
+	</tr>
+	<!-- End of product 1 -->
+
+	<!-- Start of product 2 -->
+	<tr>
+		<td>
+		<table cellPadding="3" width="520">
+		<tr bgColor="powderblue">
+			<td colSpan=3><h3>Medium Mouse Mat</h3><input name="code" type="hidden" value="MMM"><input name="description" type="hidden" value="Medium Mouse Mat"></td>
+		</tr>
+		<tr>
+			<td rowSpan="6" width="120" bgColor="powderblue" style="valign:middle; text-align:center"><img src="images/m_mouse.jpg" alt="Medium mouse mat"></td>
+		</tr>
+		<tr>
+			<td><b>Dimensions</b> - 20cm x 25cm</td>
+		</tr>
+		<tr>
+			<td><b>Ref</b> - MMM</td>
+		</tr>
+		<tr>
+			<td><b>Features</b> - Flat, smooth surface, &amp; soft foam underside.<br></td>
+		</tr>
+		<tr>
+			<td><b>Cost<input name="price" type="hidden" value="9.99"> - &pound;9.99</b></td>
+		</tr>
+		<tr>
+			<td><b>Quantity: </b><input name="qty" size="3" value="0" onBlur="calculate(this.form);"></td>
+		</tr>
+		</table>
+		</td>
+	</tr>
+	<!-- End of product 2 -->
+	
+	<!-- To add a new product to this list copy this block for product 3, and paste it underneath changing all necessary details. -->
+	<!-- Start of product 3 -->
+	<tr>
+		<td>
+		<table cellPadding="3" width="520">
+		<tr bgColor="powderblue">
+			<td colSpan=3><h3>Large Mouse Mat</h3><input name=code type=hidden value="LMM"><input name=description type=hidden value="Large Mouse Mat"></td>
+		</tr>
+		<tr>
+			<td rowSpan="6" width="120" bgColor="powderblue" style="valign:middle; text-align:center"><img src="images/l_mouse.jpg" alt="Large mouse mat"></td>
+		</tr>
+		<tr>
+			<td><b>Dimensions</b> - 25cm x 30cm</td>
+		</tr>
+		<tr>
+			<td><b>Ref</b> - LMM</td>
+		</tr>
+		<tr>
+			<td><b>Features</b> - Flat, smooth surface, &amp; soft foam underside.<br></td>
+		</tr>
+		<tr>
+			<td><b>Cost<input name=price type=hidden value="14.99"> - &pound;14.99</b></td>
+		</tr>
+		<tr>
+			<td><b>Quantity: </b><input name=qty size=3 value="0" onBlur="calculate(this.form);"></td>
+		</tr>
+		</table>
+		</td>
+	</tr>
+	<!-- End of product 3 -->
+	<!-- End of Product List -->
+
+	<!-- This is where the postage and packaging is added. -->
+	<tr>
+		<td><br>
+		<table bgColor="steelblue" width="520" cellspacing="3" cellpadding="3">
+		<input name=carriage_amount type=hidden value=uk>
+		<tr>
+			<!-- Postage and packaging is calculated here. -->
+			<td><b>Postage &amp;<br>Packaging:</b></td>
+			<td><input checked name="postage_and_packaging" onclick="typeOfCarriage(this.form,'uk');calculate(this.form)" type=radio value=""><B>UK</B> (&pound;3.75)</td>
+			<td><input name="postage_and_packaging" onclick="typeOfCarriage(this.form,'europe');calculate(this.form)" type=radio value=""><b>Europe</b> (&pound;4.75)</td>
+			<td><input name=postage_and_packaging onclick="typeOfCarriage(this.form,'world');calculate(this.form)" type=radio value=""><b>World</b> (&pound;5.75)</td>
+		</tr>
+		<tr>
+			<!-- This is the total calculation button. -->
+			<td colspan="2" bgColor="steelblue"><input name="calcButton" onclick="calculate(this.form)" type=button value="Calculate Total"></td>
+			<td colspan="2" bgColor="steelblue"><b>Total: &pound; </b><input name="amount" onfocus="setTimeout('defocus()',1)" size=7 value="0"></td>
+		</tr>
+		</table>
+		<br>
+
+		<!-- This table is used for entering the personal details of the customers. It is important that all the required detials are captured because the 'hideContact' option is being used in the purchase token. -->
+		<!-- If these details are not correctly captured the purchase will fail. For more information on what is required see the help section on the 'Purchase token' and hideContact info in code blocks 2 and 3. -->
+		<table align="center" bgcolor="steelblue" cellpadding="2">
+		<tr>
+			<td colspan="2" style="text-align:center"><h2><u>Please enter your personal details</u></h2></td>
+		</tr>
+		<tr>
+			<td style="text-align:right">Name: </td>
+			<td><input maxLength=40 name=name size=30 value=""></td>
+		</tr>
+		<tr>
+			<td style="text-align:right">Address: </td>
+			<td><TEXTAREA cols=30 name=address rows=4></TEXTAREA></td>
+		</tr>
+		<tr>
+			<td style="text-align:right">Country: </td>
+			<td>
+			<!-- Countries can be added or removed form this list. -->
+			<SELECT name=country>
+					<OPTION SELECTED VALUE="">Please select country
+					<OPTION value=AF>Afghanistan
+					<OPTION value=AL>Albania
+					<OPTION value=DZ>Algeria
+					<OPTION value=AS>American Samoa
+					<OPTION value=AD>Andorra
+					<OPTION value=AO>Angola
+					<OPTION value=AI>Anguilla
+					<OPTION value=AQ>Antarctica
+					<OPTION value=AG>Antigua and Barbuda
+					<OPTION value=AR>Argentina
+					<OPTION value=AM>Armenia
+					<OPTION value=AW>Aruba
+					<OPTION value=AU>Australia
+					<OPTION value=AT>Austria
+					<OPTION value=AZ>Azerbaijan
+					<OPTION value=BS>Bahamas
+					<OPTION value=BH>Bahrain
+					<OPTION value=BD>Bangladesh
+					<OPTION value=BB>Barbados
+					<OPTION value=BY>Belarus
+					<OPTION value=BE>Belgium
+					<OPTION value=BZ>Belize
+					<OPTION value=BJ>Benin
+					<OPTION value=BM>Bermuda
+					<OPTION value=BT>Bhutan
+					<OPTION value=BO>Bolivia
+					<OPTION value=BA>Bosnia and Herzegovina
+					<OPTION value=BW>Botswana
+					<OPTION value=BV>Bouvet Island
+					<OPTION value=br>brazil
+					<OPTION value=IO>british Indian Ocean Territory
+					<OPTION value=BN>brunei Darussalam
+					<OPTION value=BG>Bulgaria
+					<OPTION value=BF>Burkina Faso
+					<OPTION value=BI>Burundi
+					<OPTION value=KH>Cambodia
+					<OPTION value=CM>Cameroon
+					<OPTION value=CA>Canada
+					<OPTION value=CV>Cape Verde
+					<OPTION value=KY>Cayman Islands
+					<OPTION value=CF>Central African Republic
+					<OPTION value=td>Chad
+					<OPTION value=CL>Chile
+					<OPTION value=CN>China
+					<OPTION value=CX>Christmas Island
+					<OPTION value=CC>Cocos (Keeling) Islands
+					<OPTION value=CO>Colombia
+					<OPTION value=KM>Comoros
+					<OPTION value=CG>Congo
+					<OPTION value=CK>Cook Islands
+					<OPTION value=CR>Costa Rica
+					<OPTION value=HR>Croatia
+					<OPTION value=CU>Cuba
+					<OPTION value=CY>Cyprus
+					<OPTION value=CZ>Czech Republic
+					<OPTION value=CI>Côte d'Ivoire
+					<OPTION value=DK>Denmark
+					<OPTION value=DJ>Djibouti
+					<OPTION value=DM>Dominica
+					<OPTION value=DO>Dominican Republic
+					<OPTION value=TP>East Timor
+					<OPTION value=EC>Ecuador
+					<OPTION value=EG>Egypt
+					<OPTION value=SV>El salvador
+					<OPTION value=GQ>Equatorial Guinea
+					<OPTION value=ER>Eritrea
+					<OPTION value=EE>Estonia
+					<OPTION value=ET>Ethiopia
+					<OPTION value=FK>Falkland Islands
+					<OPTION value=FO>Faroe Islands
+					<OPTION value=FJ>Fiji
+					<OPTION value=FI>Finland
+					<OPTION value=FR>France
+					<OPTION value=GF>French Guiana
+					<OPTION value=PF>French Polynesia
+					<OPTION value=TF>French Southern Territories
+					<OPTION value=GA>Gabon
+					<OPTION value=GM>Gambia
+					<OPTION value=GE>Georgia
+					<OPTION value=DE>Germany
+					<OPTION value=GH>Ghana
+					<OPTION value=GI>Gibraltar
+					<OPTION value=GR>Greece
+					<OPTION value=GL>Greenland
+					<OPTION value=GD>Grenada
+					<OPTION value=GP>Guadeloupe
+					<OPTION value=GU>Guam
+					<OPTION value=GT>Guatemala
+					<OPTION value=GN>Guinea
+					<OPTION value=GW>Guinea-Bissau
+					<OPTION value=GY>Guyana
+					<OPTION value=HT>Haiti
+					<OPTION value=HM>Heard Island and McDonald Islands
+					<OPTION value=VA>Holy See (Vatican City State)
+					<OPTION value=HN>Honduras
+					<OPTION value=HK>Hong Kong
+					<OPTION value=HU>Hungary
+					<OPTION value=IS>Iceland
+					<OPTION value=IN>India
+					<OPTION value=ID>Indonesia
+					<OPTION value=IR>Iran
+					<option value=IE>Ireland
+					<option value=IL>Israel
+					<option value=IT>Italy
+					<option value=JM>Jamaica
+					<option value=JP>Japan
+					<option value=JO>Jordan
+					<option value=KZ>Kazakstan
+					<option value=KE>Kenya
+					<option value=KI>Kiribati
+					<option value=KW>Kuwait
+					<option value=KG>Kyrgystan
+					<option value=LA>Lao
+					<option value=LV>Latvia
+					<option value=LB>Lebanon
+					<option value=LS>Lesotho
+					<option value=LR>Liberia
+					<option value=LY>Libyan Arab Jamahiriya
+					<option value=LI>Liechtenstein
+					<option value=LT>Lithuania
+					<option value=LU>Luxembourg
+					<option value=MO>Macau
+					<option value=MK>Macedonia (FYR)
+					<option value=MG>Madagascar
+					<option value=MW>Malawi
+					<option value=MY>Malaysia
+					<option value=MV>Maldives
+					<option value=ML>Mali
+					<option value=MT>Malta
+					<option value=MH>Marshall Islands
+					<option value=MQ>Martinique
+					<option value=MR>Mauritania
+					<option value=MU>Mauritius
+					<option value=YT>Mayotte
+					<option value=MX>Mexico
+					<option value=FM>Micronesia
+					<option value=MD>Moldova
+					<option value=MC>Monaco
+					<option value=MN>Mongolia
+					<option value=MS>Montserrat
+					<option value=MA>Morocco
+					<option value=MZ>Mozambique
+					<option value=MM>Myanmar
+					<option value=NA>Namibia
+					<option value=NR>Nauru
+					<option value=NP>Nepal
+					<option value=NL>Netherlands
+					<option value=AN>Netherlands Antilles
+					<option value=NT>Neutral Zone
+					<option value=NC>New Caledonia
+					<option value=NZ>New Zealand
+					<option value=NI>Nicaragua
+					<option value=NE>Niger
+					<option value=NG>Nigeria
+					<option value=NU>Niue
+					<option value=NF>Norfolk Island
+					<option value=KP>North Korea
+					<option value=MP>Northern Mariana Islands
+					<option value=NO>Norway
+					<option value=OM>Oman
+					<option value=PK>Pakistan
+					<option value=PW>Palau
+					<option value=PA>Panama
+					<option value=PG>Papua New Guinea
+					<option value=PY>Paraguay
+					<option value=PE>Peru
+					<option value=PH>Philippines
+					<option value=PN>Pitcairn
+					<option value=PL>Poland
+					<option value=PT>Portugal
+					<option value=PR>Puerto Rico
+					<option value=QA>Qatar
+					<option value=RE>Reunion
+					<option value=RO>Romania
+					<option value=RU>Russian Federation
+					<option value=RW>Rwanda
+					<option value=SH>Saint Helena
+					<option value=KN>Saint Kitts and Nevis
+					<option value=LC>Saint Lucia
+					<option value=PM>Saint Pierre and Miquelon
+					<option value=VC>Saint Vincent and the Grenadines
+					<option value=WS>Samoa
+					<option value=SM>San Marino
+					<option value=ST>Sao Tome and Principe
+					<option value=SA>Saudi Arabia
+					<option value=SN>Senegal
+					<option value=SC>Seychelles
+					<option value=SL>Sierra Leone
+					<option value=SG>Singapore
+					<option value=SK>Slovakia
+					<option value=SI>Slovenia
+					<option value=SB>Solomon Islands
+					<option value=SO>Somalia
+					<option value=ZA>South Africa
+					<option value=GS>South Georgia
+					<option value=KR>South Korea
+					<option value=ES>Spain
+					<option value=LK>Sri Lanka
+					<option value=SD>Sudan
+					<option value=SR>Suriname
+					<option value=SJ>Svalbard and Jan Mayen Islands
+					<option value=SZ>Swaziland
+					<option value=SE>Sweden
+					<option value=CH>Switzerland
+					<option value=SY>Syria
+					<option value=TW>Taiwan
+					<option value=TJ>Tajikistan
+					<option value=TZ>Tanzania	
+					<option value=TH>Thailand
+					<option value=TG>Togo
+					<option value=TK>Tokelau
+					<option value=TO>Tonga
+					<option value=TT>trinidad and Tobago
+					<option value=TN>Tunisia
+					<option value=tr>Turkey
+					<option value=TM>Turkmenistan
+					<option value=TC>Turks and Caicos Islands
+					<option value=TV>Tuvalu
+					<option value=UG>Uganda
+					<option value=UA>Ukraine
+					<option value=AE>United Arab Emirates
+					<option value=GB>United Kingdom
+					<option value=UM>United States Minor Outlying Islands
+					<option value=US>United States of America
+					<option value=UY>Uruguay
+					<option value=UZ>Uzbekistan
+					<option value=VU>Vanuatu
+					<option value=VE>Venezuela
+					<option value=VN>Viet Nam
+					<option value=VG>Virgin Islands (british)
+					<option value=VI>Virgin Islands (U.S.)
+					<option value=WF>Wallis and Futuna Islands
+					<option value=EH>Western Sahara
+					<option value=YE>Yemen
+					<option value=YU>Yugoslavia
+					<option value=ZR>Zaire
+					<option value=ZM>Zambia
+					<option value=ZW>Zimbabwe
+			</select>
+			</td>
+		</tr>		
+		<tr>
+			<td style="text-align:right">Postcode/Zip code: </td>
+			<td><input maxLength=12 name=postcode size=30></td>
+		</tr>
+		<tr>
+			<td style="text-align:right">Telephone: </td>
+			<td><input maxLength=30 name=tel size=30></td>
+		</tr>
+		<tr>
+			<td style="text-align:right">Fax No.: </td>
+			<td><input name=fax> </td>
+		</tr>
+		<tr>
+			<td style="text-align:right">e-mail: </td>
+			<td><input name=email></td>
+		</tr>
+		</table>
+		</td>
+	</tr>
+	</table>
+
+	<!-- This is the submit button for sending the form. -->
+	<p align=center><input type=image src="images/mouse_button.jpg" alt="Buy Mouse Mats" value=Checkout onclick="calculate(this.form)"></p>
+	<!-- This is the page footer. -->
+	<p>Note: Refunds will be given at the discretion of the Company management.<br>| <a href="jr_example2.html">HOME</a> |</p>
+	
+	<!-- This is the right hand page line divider. -->
+	</td><td style="background-image:url('images/line.jpg')"></td>
+</tr>
+</table>
+
+</form>
+</body>
+</html>
